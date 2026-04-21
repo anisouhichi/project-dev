@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "destination": "Paris, France",
+    "date_depart": "2026-06-15",
+    "prix": 1200,
+    "places_disponibles": 15,
+    "options": [
+      {"name": "Assurance voyage", "price": 50},
+      {"name": "Visite guidée Louvre", "price": 80},
+      {"name": "Petit-déjeuner inclus", "price": 100}
+    ]
+  },
+  {
+    "id": 2,
+    "destination": "Tokyo, Japon",
+    "date_depart": "2026-09-10",
+    "prix": 2500,
+    "places_disponibles": 10,
+    "options": [
+      {"name": "Assurance voyage", "price": 70},
+      {"name": "Pass Transport 7j", "price": 150},
+      {"name": "Dîner traditionnel", "price": 120}
+    ]
+  },
+  {
+    "id": 3,
+    "destination": "Marrakech, Maroc",
+    "date_depart": "2026-05-20",
+    "prix": 800,
+    "places_disponibles": 20,
+    "options": [
+      {"name": "Assurance voyage", "price": 30},
+      {"name": "Excursion Désert", "price": 90},
+      {"name": "Hammam & Spa", "price": 60}
+    ]
+  },
+  {
+    "id": 4,
+    "destination": "New York, USA",
+    "date_depart": "2026-07-04",
+    "prix": 1800,
+    "places_disponibles": 12,
+    "options": [
+      {"name": "Assurance voyage", "price": 60},
+      {"name": "Pass City Explorer", "price": 110},
+      {"name": "Transfert Aéroport", "price": 40}
+    ]
+  },
+  {
+    "id": 5,
+    "destination": "Rome, Italie",
+    "date_depart": "2026-10-12",
+    "prix": 950,
+    "places_disponibles": 25,
+    "options": [
+      {"name": "Assurance voyage", "price": 40},
+      {"name": "Billet coupe-file Colisée", "price": 55},
+      {"name": "Cours de cuisine Pasta", "price": 75}
+    ]
+  }
+]

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pipch Travels - Gestion d'Agence</title>
+    <meta name="description" content="Solution complète de gestion d'inscriptions pour agences de voyages.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i data-lucide="plane"></i>
+                <span> Travel agency</span>
+            </div>
+            <div class="header-actions">
+                <button id="themeToggle" class="theme-switch" title="Changer de thème">
+                    <i data-lucide="sun" id="sunIcon"></i>
+                    <i data-lucide="moon" id="moonIcon" style="display:none"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-target="trips-section">
+                <i data-lucide="search"></i> Voyages
+            </button>
+            <button class="tab-btn" data-target="registration-section">
+                <i data-lucide="user-plus"></i> Inscription
+            </button>
+            <button class="tab-btn" data-target="receipts-section">
+                <i data-lucide="file-text"></i> Reçus
+            </button>
+        </nav>
+
+        <main>
+            <!-- Section 1: Consultation des Voyages -->
+            <section id="trips-section" class="tab-content active">
+                <div class="card">
+                    <h2>Explorez nos destinations</h2>
+
+                    <div class="controls">
+                        <div class="form-group">
+                            <label for="searchDest">Rechercher une destination</label>
+                            <input type="text" id="searchDest" placeholder="Ex: Paris, Tokyo...">
+                        </div>
+                        <div class="form-group">
+                            <label for="filterPrice">Prix maximum (€)</label>
+                            <input type="number" id="filterPrice" placeholder="Ex: 1500">
+                        </div>
+                        <div class="form-group">
+                            <label for="sortBy">Trier par</label>
+                            <select id="sortBy">
+                                <option value="date-asc">Date (plus proche)</option>
+                                <option value="date-desc">Date (plus loin)</option>
+                                <option value="price-asc">Prix (croissant)</option>
+                                <option value="price-desc">Prix (décroissant)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="tripsTable">
+                            <thead>
+                                <tr>
+                                    <th>Destination</th>
+                                    <th>Date Départ</th>
+                                    <th>Prix Base</th>
+                                    <th>Places</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tripsBody">
+                                <!-- Data injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Inscription -->
+            <section id="registration-section" class="tab-content">
+                <div class="card">
+                    <h2>Nouvelle Inscription</h2>
+
+                    <form id="registrationForm">
+                        <div class="registration-grid">
+                            <!-- Left Column -->
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="nom">Nom *</label>
+                                    <input type="text" id="nom" required>
+                                    <span class="error-msg">Le nom est requis</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prenom">Prénom *</label>
+                                    <input type="text" id="prenom" required>
+                                    <span class="error-msg">Le prénom est requis</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passport">Numéro de Passeport *</label>
+                                    <input type="text" id="passport" placeholder="Ex: AB123456" required>
+                                    <span class="error-msg">Format invalide (2 lettres + 6 chiffres)</span>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="voyageSelect">Choisir un voyage *</label>
+                                    <select id="voyageSelect" required>
+                                        <option value="">-- Sélectionnez un voyage --</option>
+                                        <!-- Injected via JS -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="companions">Nombre d'accompagnateurs</label>
+                                    <input type="number" id="companions" min="0" value="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Options additionnelles</label>
+                                    <div id="optionsContainer" class="options-group">
+                                        <!-- Options injected based on selected trip -->
+                                        <p class="text-muted" style="font-size: 0.85rem">Choisissez d'abord un voyage
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-color);">
+
+                        <div class="payment-section">
+                            <h3>Mode de Paiement</h3>
+                            <div class="options-group" style="margin-bottom: 1.5rem">
+                                <label class="option-item">
+                                    <input type="radio" name="paymentMethod" value="cash" checked> Espèces
+                                </label>
+                                <label class="option-item">
+                                    <input type="radio" name="paymentMethod" value="check"> Chèque
+                                </label>
+                            </div>
+
+                            <div id="checkDetails" class="form-group" style="display:none">
+                                <label for="checkNumber">Numéro de Chèque *</label>
+                                <input type="text" id="checkNumber" placeholder="CHQ123456789">
+                                <span class="error-msg">Format de chèque requis</span>
+                            </div>
+                        </div>
+
+                        <div id="priceSummary" class="summary-box" style="display:none">
+                            <div class="summary-header">
+                                <h4>Aperçu du prix</h4>
+                            </div>
+                            <div id="summaryContent"></div>
+                        </div>
+
+                        <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                            <button type="button" id="btnCalculate" class="btn btn-primary"
+                                style="background: var(--secondary)">
+                                <i data-lucide="calculator"></i> Calculer
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="btnSubmit">
+                                <i data-lucide="check-circle"></i> Confirmer l'inscription
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Section 3: Reçus -->
+            <section id="receipts-section" class="tab-content">
+                <div class="card">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h2>Reçus & Inscriptions</h2>
+                        <button id="clearStorage" class="btn btn-sm" style="color: var(--danger)">
+                            <i data-lucide="trash-2"></i> Effacer tout
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Destination</th>
+                                    <th>Type Paiement</th>
+                                    <th>Total Payé</th>
+                                    <th>Date Enr.</th>
+                                </tr>
+                            </thead>
+                            <tbody id="receiptsBody">
+                                <!-- Data from LocalStorage -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification system -->
+    <div id="notification"
+        style="position: fixed; bottom: 20px; right: 20px; padding: 1rem 2rem; border-radius: 0.5rem; background: var(--success); color: white; display: none; box-shadow: var(--shadow-lg); transition: all 0.3s; transform: translateY(100px); z-index: 1000;">
+        Succès ! Inscription enregistrée.
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
